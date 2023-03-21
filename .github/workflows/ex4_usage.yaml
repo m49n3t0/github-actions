@@ -1,0 +1,29 @@
+name: Use reusable workflow
+
+on:
+
+#  workflow_dispatch:
+  pull_request:
+#  push:
+
+
+env:
+  NODE_VERSION: 14
+
+jobs:
+  show-me-job:
+    runs-on: ubuntu-latest
+    outputs:
+      noodle: ${{ steps.show-me-value.outputs.show-us }}
+    steps:
+        - name: output-me-value
+          shell: bash
+          run: echo "show-us=${{ env.NODE_VERSION }}" >> $GITHUB_OUTPUT
+  call-workflow-passing-data:
+    needs: show-me-job
+    uses: ./.github/workflows/ex4.yaml
+    with:
+      #node-version: ${{ env.NODE_VERSION }}
+      node-version: ${{ needs.show-me-job.outputs.noodle }}
+      #node-version: 14
+
