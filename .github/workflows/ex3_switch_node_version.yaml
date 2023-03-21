@@ -2,7 +2,7 @@ name: Switch Node version
 
 on:
   pull_request:
-  push:
+#  push:
 jobs:
   run-npm-test:
     runs-on: ubuntu-latest
