@@ -2,8 +2,8 @@ name: build docker
 on:
   pull_request:
   push:
-#    branches:
-#      - main
+    branches:
+      - main
 
 jobs:
   run-npm-install:
@@ -21,7 +21,7 @@ jobs:
             npm install
             npm test
         - name: docker build
-          if: ${{ github.branch == 'main' }}
+          if: github.branch == 'main'
           shell: bash
           run: |
             echo "BUILDING DOCKERFILE...."
